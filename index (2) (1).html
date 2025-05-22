@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRACKER VPN 30s WINGO</title>
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri&display=swap" rel="stylesheet">
+    <!--Ye website Team SRS ne leak ki hai aur aise saari websites ka source bhi leak hoga. DM karein for more source code aur follow karein @enzosrs -->
+    <!-- This Web Free By #enzo #dev-->
+    <style>
+        body {
+            font-family: 'El Messiri', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLbbSTOqV0VGzhxx9QO5woJjCj4O6YsO-1nQF36tRZ-SN4-635brJQJpc&s=10') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            width: 350px;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            color: #FFD700;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+        .result-box {
+            margin: 25px 0;
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .result-box p {
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .result-text {
+            color: white;
+            font-weight: bold;
+            font-size: 22px;
+        }
+        #result {
+            color: #4ECDC4;
+            text-shadow: 0 0 5px rgba(78, 205, 196, 0.5);
+        }
+        .timer-container {
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .timer-progress {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(to right, #FF6B6B, #4ECDC4);
+            border-radius: 5px;
+            animation: timerAnimation 30s linear infinite;
+        }
+        @keyframes timerAnimation {
+            0% { width: 100%; }
+            100% { width: 0%; }
+        }
+        .history {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .history-item {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <!--Ye website Team SRS ne leak ki hai aur aise saari websites ka source bhi leak hoga. DM karein for more source code aur follow karein @enzosrs -->
+    <!-- This Web Free By #enzo #dev-->
+    <div class="container">
+        <h1>CRACKER VPN 30s WINGO</h1>
+        
+        <div class="timer-container">
+            <div class="timer-progress"></div>
+        </div>
+        
+        <div class="result-box">
+            <p><span>Period:</span> <span id="period">000000</span></p>
+            <p><span>Timer:</span> <span id="timer">00:30</span></p>
+            <p><span>Result:</span> <span id="result" class="result-text">Pending...</span></p>
+        </div>
+        
+        <div class="history" id="history">
+            <!-- History items will appear here -->
+        </div>
+        
+        <div class="footer">
+            Results update every 30 seconds
+        </div>
+    </div>
+
+<script>
+    let lastPeriod = "";
+    let resultHistory = [];
+    const maxHistory = 10; // Show last 10 results
+
+    function updatePeriodAndTimer() {
+        let now = new Date();
+        let startHour = 5, startMinute = 30;
+        let startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), startHour, startMinute, 0);
+        let elapsedSeconds = Math.floor((now - startTime) / 1000);
+        
+        if (elapsedSeconds < 0) {
+            // If before start time, adjust to next day
+            startTime.setDate(startTime.getDate() - 1);
+            elapsedSeconds = Math.floor((now - startTime) / 1000);
+        }
+
+        let totalPeriods = Math.floor(elapsedSeconds / 30);
+        let upcomingPeriod = totalPeriods + 1;
+        let formattedDate = new Intl.DateTimeFormat('en-GB', { 
+            year: 'numeric', 
+            month: '2-digit', 
+            day: '2-digit' 
+        }).format(now).replace(/\//g, '');
+        
+        let periodNumber = `100005${String(upcomingPeriod).padStart(4, '0')}`;
+        let lastFourDigits = periodNumber.slice(-4);
+        
+        if (periodNumber !== lastPeriod) {
+            lastPeriod = periodNumber;
+            generateResult(lastFourDigits);
+        }
+
+        let periodElement = document.getElementById("period");
+        let timerElement = document.getElementById("timer");
+        
+        if (periodElement) periodElement.innerText = formattedDate + periodNumber;
+        
+        let remainingSeconds = 30 - (elapsedSeconds % 30);
+        if (timerElement) {
+            timerElement.innerText = `00:${String(remainingSeconds).padStart(2, '0')}`;
+        }
+
+        // Reset animation
+        const timerProgress = document.querySelector('.timer-progress');
+        if (timerProgress) {
+            timerProgress.style.animation = 'none';
+            setTimeout(() => {
+                timerProgress.style.animation = 'timerAnimation 30s linear infinite';
+            }, 10);
+        }
+
+        setTimeout(updatePeriodAndTimer, 1000);
+    }
+
+    function generateResult(lastFourDigits) {
+        // New prediction method based on last 4 digits of period number
+        let digits = lastFourDigits.split('').map(Number);
+        
+        // Calculate sum of digits
+        let sum = digits.reduce((a, b) => a + b, 0);
+        
+        // Calculate product of digits
+        let product = digits.reduce((a, b) => a * b, 1);
+        
+        // Combine sum and product for prediction
+        let predictionValue = (sum + product) % 10;
+        
+        // Determine result based on prediction value
+        let result = predictionValue >= 5 ? "BIG" : "SMALL";
+        let resultNumber = predictionValue;
+
+        const resultElement = document.getElementById("result");
+        if (resultElement) {
+            resultElement.innerText = result;
+            resultElement.style.color = result === "SMALL" ? "#FF6B6B" : "#4ECDC4";
+            resultElement.style.textShadow = result === "SMALL" 
+                ? "0 0 5px rgba(255, 107, 107, 0.5)" 
+                : "0 0 5px rgba(78, 205, 196, 0.5)";
+        }
+
+        // Add to history
+        resultHistory.unshift({
+            result: result,
+            number: resultNumber
+        });
+
+        // Keep only last maxHistory results
+        if (resultHistory.length > maxHistory) {
+            resultHistory.pop();
+        }
+
+        updateHistoryDisplay();
+    }
+
+    function updateHistoryDisplay() {
+        const historyContainer = document.getElementById("history");
+        if (!historyContainer) return;
+        
+        historyContainer.innerHTML = '';
+        
+        resultHistory.forEach(item => {
+            const historyItem = document.createElement("div");
+            historyItem.className = "history-item";
+            historyItem.innerText = item.number;
+            historyItem.style.color = item.result === "SMALL" ? "#FF6B6B" : "#4ECDC4";
+            historyItem.style.borderColor = item.result === "SMALL" ? "#FF6B6B" : "#4ECDC4";
+            historyContainer.appendChild(historyItem);
+        });
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        updatePeriodAndTimer();
+        // Generate first result will happen automatically after first period check
+    });
+</script>
+</body>
+</html>
